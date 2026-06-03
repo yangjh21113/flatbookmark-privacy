@@ -39,58 +39,126 @@
         color: #999;
         margin-bottom: 24px;
       }
+      code {
+        background: #f5f7fa;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 13px;
+        color: #e74c3c;
+      }
     </style>
   </head>
   <body>
     <h1>FlatBookMark 隐私政策</h1>
-    <p class="updated">最后更新日期：2026-06-02</p>
+    <p class="updated">最后更新日期：2026-06-03</p>
 
-    <h2>数据收集</h2>
+    <h2>概述</h2>
     <p>
-      FlatBookMark 不收集、不传输、不存储任何用户数据到远程服务器。所有数据均保存在您的浏览器本地。
+      FlatBookMark 是一款 Chrome 浏览器扩展，用于将您的书签以扁平化网格的形式展示在新标签页上。
+      我们高度重视您的隐私。本隐私政策旨在清晰、透明地说明本扩展的数据处理方式。
     </p>
 
-    <h2>本地存储</h2>
+    <h2>数据收集与使用</h2>
     <p>
-      扩展使用 Chrome 提供的
-      <code>chrome.storage.local</code>
-      存储以下数据：
+      FlatBookMark
+      <strong>不收集、不传输、不存储任何用户数据到远程服务器</strong>
+      。 扩展运行时所需的全部数据（书签内容、用户配置、偏好设置）均通过 Chrome 原生 API 实时读取，
+      或保存在浏览器的本地存储中，不会离开您的设备。
     </p>
+    <p>我们不会：</p>
     <ul>
-      <li>书签布局配置（根文件夹名称、网格布局）</li>
-      <li>主题设置（浅色/深色模式、主题色、背景图片）</li>
-      <li>收藏书签列表</li>
-      <li>语言偏好</li>
+      <li>收集或上传您的浏览历史</li>
+      <li>收集或上传您的书签内容</li>
+      <li>追踪您的网页访问行为</li>
+      <li>向任何第三方发送数据</li>
+      <li>嵌入任何分析脚本、广告代码或追踪器</li>
     </ul>
 
     <h2>权限说明</h2>
+    <p>本扩展请求以下 Chrome 权限，每个权限都仅用于实现核心功能：</p>
     <ul>
       <li>
         <strong>bookmarks</strong>
-        ：读取和修改您的 Chrome 书签，用于在新标签页以网格形式展示
+        — 读取您的书签树结构，以及在您拖拽、重命名、删除书签时同步修改 Chrome 书签。
+        这是扩展的核心功能，没有此权限无法工作。
       </li>
       <li>
         <strong>favicon</strong>
-        ：获取每个书签网站的图标，展示在书签卡片上
+        — 调用 Chrome 内置的 favicon API（
+        <code>chrome://favicon</code>
+        ），为每个书签显示其网站图标。
       </li>
       <li>
         <strong>storage</strong>
-        ：将您的布局配置、主题偏好、收藏列表保存在浏览器本地
+        — 使用
+        <code>chrome.storage.local</code>
+        在您的浏览器本地存储以下数据：
+        <ul>
+          <li>书签布局配置（根文件夹名称、网格布局）</li>
+          <li>主题设置（浅色/深色模式）</li>
+          <li>收藏书签列表</li>
+          <li>语言偏好</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>主机权限</h2>
+    <p>
+      本扩展请求
+      <code>&lt;all_urls&gt;</code>
+      主机权限，仅用于以下目的：
+    </p>
+    <ul>
+      <li>通过 Chrome 的 favicon API 获取任意网站（无论域名）的图标，以在书签卡片上显示。</li>
+    </ul>
+    <p>扩展不会访问、读取或修改任何网页的内容。此权限仅用于 favicon 图标的跨域获取。</p>
+
+    <h2>本地存储数据明细</h2>
+    <p>
+      扩展使用
+      <code>chrome.storage.local</code>
+      存储以下键值，所有数据仅保存在您的浏览器本地：
+    </p>
+    <ul>
+      <li>
+        <code>crx-bookmark-config</code>
+        — 书签根文件夹名称、网格布局（如 2×5、3×3）
       </li>
       <li>
-        <strong>tabs</strong>
-        ：点击书签时在新标签页打开链接
+        <code>crx-theme</code>
+        — 当前主题模式（浅色/深色）
       </li>
       <li>
-        <strong>sidePanel</strong>
-        ：提供 Chrome 侧边栏入口，快速访问书签页
+        <code>crx-bookmark-favorites</code>
+        — 被收藏的书签 ID 列表
+      </li>
+      <li>
+        <code>crx-language</code>
+        — 用户选择的语言（中文/English）
       </li>
     </ul>
 
     <h2>第三方服务</h2>
-    <p>本扩展不使用任何第三方追踪服务、分析工具或广告网络。不向任何第三方发送用户数据。</p>
+    <p>
+      本扩展不使用任何第三方追踪服务、分析工具、广告网络或外部 API。 所有功能均通过 Chrome 原生 API
+      和本地代码实现。
+    </p>
 
-    <h2>变更</h2>
-    <p>如有隐私政策变更，我们将通过扩展更新说明告知用户。</p>
+    <h2>开源与代码</h2>
+    <p>
+      如果您希望验证上述声明，欢迎查看我们的源代码。所有代码均为标准 JavaScript/TypeScript，
+      不包含任何隐藏的追踪或数据收集逻辑。
+    </p>
+
+    <h2>政策变更</h2>
+    <p>
+      如果本隐私政策发生变更，我们将通过扩展的更新日志或 Chrome 应用商店的更新说明告知用户。
+      我们建议您定期查看本页面以了解最新信息。
+    </p>
+
+    <h2>联系我们</h2>
+    <p>
+      如果您对本隐私政策有任何疑问或建议，请通过 Chrome 应用商店的开发者联系渠道与我们取得联系。
+    </p>
   </body>
 </html>
